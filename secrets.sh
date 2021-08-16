@@ -18,7 +18,6 @@ usage() {
   echo "$programname [-p <aws profile>] -s <secret name> -e <environment>"
   echo ""
   echo "  -s   Service name"
-  echo "  -e   Environment"
   echo "  -p   AWS profile (default: \"default\")"
   echo "  -h   Display this help"
   echo "  -v   Display version"
@@ -41,9 +40,6 @@ while getopts "p:s:e:hv" OPTION; do
     ;;
   s)
     secret=$OPTARG
-    ;;
-  e)
-    environment=$OPTARG
     ;;
   *)
     echo "Incorrect options provided"
