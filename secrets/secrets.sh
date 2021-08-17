@@ -41,6 +41,9 @@ while getopts "p:s:e:hv" OPTION; do
   s)
     secret=$OPTARG
     ;;
+  e)
+    environment=$OPTARG
+    ;;
   *)
     echo "Incorrect options provided"
     exit 1
@@ -49,7 +52,7 @@ while getopts "p:s:e:hv" OPTION; do
 done
 
 create_exports () {
- AWS_PROFILE=${aws_profile} aws secretsmanager get-secret-value --secret-id "${secret}" | \
+ AWS_PROFILE=${aws_profile} aws secretsmanager get-secret-value --secret-id "${secret}-${environment}" | \
  jq '.SecretString' | \
  sed 's/\\"/\"/g; s/\"{/{/g; s/\}"/}/g' | \
  ${parent_path}/parse-secrets-json.sh
