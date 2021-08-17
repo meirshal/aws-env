@@ -56,4 +56,4 @@ create_exports () {
 }
 
 exports=$(create_exports)
-eval ${exports}
+echo ${exports}
