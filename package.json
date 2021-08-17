@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "A tool for injecting secrets and non-secret configuration, managed on AWS, as environment variables",
   "scripts": ["aws-env.sh"],
-  "global": "true"
+  "global": "true",
+  "install": "echo \"installing aws-env\""
 }
