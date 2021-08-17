@@ -69,14 +69,14 @@ aws-env () {
 
   case ${type} in
   secret)
-    ${parent_path}/secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
+    ${parent_path}/aws-env-secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
     ;;
   non_secret)
-    ${parent_path}/config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
+    ${parent_path}/aws-env-config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
     ;;
   all)
-    ${parent_path}/secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
-    ${parent_path}/config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
+    ${parent_path}/aws-env-secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
+    ${parent_path}/aws-env-config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
     ;;
   *)
     usage
