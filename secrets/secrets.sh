@@ -15,7 +15,7 @@ version() {
 usage() {
   echo "Usage:"
   echo ""
-  echo "$programname [-p <aws profile>] -s <secret name> -e <environment>"
+  echo "$programname [-p <aws profile>] -s <service name> -e <environment>"
   echo ""
   echo "  -s   Service name"
   echo "  -p   AWS profile (default: \"default\")"
@@ -39,7 +39,7 @@ while getopts "p:s:e:hv" OPTION; do
     aws_profile=$OPTARG
     ;;
   s)
-    secret=$OPTARG
+    service=$OPTARG
     ;;
   e)
     environment=$OPTARG
@@ -51,8 +51,13 @@ while getopts "p:s:e:hv" OPTION; do
   esac
 done
 
+if [ -z "${service}" ] || [ -z "${environment}" ]; then
+  usage
+  exit 1
+fi
+
 create_exports () {
- AWS_PROFILE=${aws_profile} aws secretsmanager get-secret-value --secret-id "${secret}-${environment}" | \
+ AWS_PROFILE=${aws_profile} aws secretsmanager get-secret-value --secret-id "${service}-${environment}" | \
  jq '.SecretString' | \
  sed 's/\\"/\"/g; s/\"{/{/g; s/\}"/}/g' | \
  ${parent_path}/parse-secrets-json.sh

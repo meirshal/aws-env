@@ -3,7 +3,7 @@
 usage() {
   echo "Usage:"
   echo ""
-  echo "$programname [-p <aws profile>] -s <service name> -e <environment> -b <base path in S3> [-t secret|non_secret|all]"
+  echo "$programname -s <service name> [-b <base path in S3>] [-e <environment>] [-t secret|non_secret|all] [-p <aws profile>]"
   echo ""
   echo "  -s   Service name"
   echo "  -b   Base path"
@@ -59,6 +59,11 @@ aws-env () {
       ;;
     esac
   done
+
+  if [ -z "${service}" ] || [ -z "${environment}" ]; then
+    usage
+    exit 1
+  fi
 
   case ${type} in
   secret)

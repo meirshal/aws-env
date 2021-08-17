@@ -56,6 +56,11 @@ while getopts "p:s:e:b:hv" OPTION; do
   esac
 done
 
+if [ -z "${service}" ] || [ -z "${environment}" ] || [ -z "${base_path}" ]; then
+  usage
+  exit 1
+fi
+
 create_exports () {
  AWS_PROFILE=${aws_profile} aws s3 cp s3://${base_path}/${service}/${environment}.yaml ./config.yaml --quiet
  ${parent_path}/parse-config-yaml.sh
