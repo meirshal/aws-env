@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
 usage() {
   echo "Usage:"
   echo ""
@@ -67,14 +69,14 @@ aws-env () {
 
   case ${type} in
   secret)
-    ./secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
+    ${parent_path}/secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
     ;;
   non_secret)
-    ./config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
+    ${parent_path}/config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
     ;;
   all)
-    ./secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
-    ./config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
+    ${parent_path}/secrets/secrets.sh -p ${aws_profile} -s ${service} -e ${environment}
+    ${parent_path}/config/config.sh -p ${aws_profile} -s ${service} -e ${environment} -b ${base_path}
     ;;
   *)
     usage
