@@ -4,5 +4,5 @@
   "description": "A tool for injecting secrets and non-secret configuration, managed on AWS, as environment variables",
   "scripts": ["aws-env.sh"],
   "global": "true",
-  "install": "echo \"installing aws-env\""
+  "install": "install -b aws-env.sh ${PREFIX:-/usr/local}/bin/aws-env"
 }
