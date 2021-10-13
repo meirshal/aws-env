@@ -62,10 +62,9 @@ if [ -z "${service}" ] || [ -z "${environment}" ] || [ -z "${base_path}" ]; then
 fi
 
 create_exports () {
- AWS_PROFILE=${aws_profile} aws s3 cp s3://${base_path}/${service}/${environment}.yaml ./config.yaml --quiet
- ${parent_path}/parse-config-yaml.sh
+  AWS_PROFILE=${aws_profile} aws s3 cp s3://${base_path}/${service}/${environment}.yaml - | \
+  ${parent_path}/parse-config-yaml.sh
 }
 
 exports=$(create_exports)
-rm ./config.yaml
 echo ${exports}
