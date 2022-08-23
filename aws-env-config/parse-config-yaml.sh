@@ -8,4 +8,4 @@ my_dict = yaml.safe_load(sys.stdin)
 environment = my_dict['environment'];
 for k, v in environment.items():
   if os.environ.get(k) == None or os.environ.get(k) == '':
-    print "%s='%s' export %s;" % (k, v, k)
+    print "%s='%s' \n" % (k, v)
