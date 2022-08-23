@@ -36,4 +36,4 @@ environment:
 
 
 ## Usage
-`$ env $(aws-env -e <environment> -s <service name> -b <S3 base path>) your_process_here`
+`$ env $(aws-env -e <environment> -s <service name> -b <S3 base path> | xargs) your_process_here`
